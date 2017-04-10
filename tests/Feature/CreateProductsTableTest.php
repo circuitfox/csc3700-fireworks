@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductTableTest extends TestCase
+class CreateproductsTableTest extends TestCase
 {
     use DatabaseMigrations;
     /**
@@ -16,48 +16,48 @@ class CreateProductTableTest extends TestCase
      *
      * @return void
      */
-    public function testHasProductTable()
+    public function testHasproductsTable()
     {
-        $this->assertTrue(Schema::hasTable('product'));
+        $this->assertTrue(Schema::hasTable('products'));
     }
 
     public function testHasIdColumn()
     {
-        $this->assertTrue(Schema::hasColumn('product', 'id'));
+        $this->assertTrue(Schema::hasColumn('products', 'id'));
     }
 
     public function testHasCatologPageColumn()
     {
-        $this->assertTrue(Schema::hasColumn('product', 'catalog_page'));
+        $this->assertTrue(Schema::hasColumn('products', 'catalog_page'));
     }
 
     public function testHasBrandColumn()
     {
-        $this->assertTrue(Schema::hasColumn('product', 'brand'));
+        $this->assertTrue(Schema::hasColumn('products', 'brand'));
     }
 
     public function testHasDescriptionColumn()
     {
-        $this->assertTrue(Schema::hasColumn('product', 'description'));
+        $this->assertTrue(Schema::hasColumn('products', 'description'));
     }
 
     public function testHasPackingColumn()
     {
-        $this->assertTrue(Schema::hasColumn('product', 'packing'));
+        $this->assertTrue(Schema::hasColumn('products', 'packing'));
     }
 
     public function testHasRemarksColumn()
     {
-        $this->assertTrue(Schema::hasColumn('product', 'remarks'));
+        $this->assertTrue(Schema::hasColumn('products', 'remarks'));
     }
 
     public function testHasPiecePriceColumn()
     {
-        $this->assertTrue(Schema::hasColumn('product', 'piece_price'));
+        $this->assertTrue(Schema::hasColumn('products', 'piece_price'));
     }
 
     public function testHasCasePriceColumn()
     {
-        $this->assertTrue(Schema::hasColumn('product', 'case_price'));
+        $this->assertTrue(Schema::hasColumn('products', 'case_price'));
     }
 }
