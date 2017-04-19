@@ -35,3 +35,16 @@ $factory->define(App\Order::class, function (Faker\Generator $faker) {
         'user_id' => 1,
     ];
 });
+
+$factory->define(App\Product::class, function (Faker\Generator $faker) {
+    return [
+        "id" => $faker->unique()->randomNumber(),
+        "catalog_page" => $faker->randomNumber(3),
+        "brand" => $faker->company,
+        "description" => $faker->paragraph(),
+        "packing" => $faker->word,
+        "remarks" => $faker->word,
+        "piece_price" => $faker->randomFloat(2),
+        "case_price" => $faker->randomFloat(2),
+    ];
+});
