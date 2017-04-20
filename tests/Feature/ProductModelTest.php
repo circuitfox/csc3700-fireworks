@@ -9,13 +9,11 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ProductModelTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testExample()
+    use DatabaseMigrations;
+
+    public function testFactory()
     {
-        $this->assertTrue(true);
+        $product = factory(\App\Product::class)->create();
+        $this->assertNotNull($product);
     }
 }
