@@ -44,7 +44,7 @@ $factory->define(App\Product::class, function (Faker\Generator $faker) {
         "description" => $faker->paragraph(),
         "packing" => $faker->word,
         "remarks" => $faker->word,
-        "piece_price" => $faker->randomFloat(2),
-        "case_price" => $faker->randomFloat(2),
+        "piece_price" => $faker->randomFloat(2, 0, 999999.99),
+        "case_price" => $faker->randomFloat(2, 0, 999999.99),
     ];
 });
