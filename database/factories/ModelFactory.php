@@ -38,13 +38,14 @@ $factory->define(App\Order::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Product::class, function (Faker\Generator $faker) {
     return [
-        "id" => $faker->unique()->randomNumber(),
-        "catalog_page" => $faker->randomNumber(3),
-        "brand" => $faker->company,
-        "description" => $faker->paragraph(),
-        "packing" => $faker->word,
-        "remarks" => $faker->word,
-        "piece_price" => $faker->randomFloat(2, 0, 999999.99),
-        "case_price" => $faker->randomFloat(2, 0, 999999.99),
+        'id' => $faker->unique()->randomNumber(),
+        'img_link' => $faker->imageUrl($width = 200, $height = 200, 'cats'),
+        'catalog_page' => $faker->randomNumber(3),
+        'brand' => $faker->company,
+        'description' => $faker->word,
+        'packing' => $faker->safeColorName,
+        'remarks' => $faker->sentence,
+        'piece_price' => $faker->randomFloat(2, 0, 999999.99),
+        'case_price' => $faker->randomFloat(2, 0, 999999.99),
     ];
 });
