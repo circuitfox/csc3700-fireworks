@@ -21,7 +21,7 @@
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a href="" class="navbar-brand">Fireworks Shop</a>
+          <a href="/" class="navbar-brand">Fireworks Shop</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">

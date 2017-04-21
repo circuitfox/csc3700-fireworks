@@ -35,3 +35,17 @@ $factory->define(App\Order::class, function (Faker\Generator $faker) {
         'user_id' => 1,
     ];
 });
+
+$factory->define(App\Product::class, function (Faker\Generator $faker) {
+    return [
+        'id' => $faker->randomNumber($nbDigits = NULL, $strict = false),
+        'img_link' => $faker->imageUrl($width = 200, $height = 200, 'cats'),
+        'catalog_page' => $faker->randomDigit,
+        'brand' => $faker->company,
+        'description' => $faker->word,
+        'packing' => $faker->safeColorName,
+        'remarks' => $faker->sentence,
+        'piece_price' => $faker->randomFloat($nbMaxDecimals = 2, $min = 100, $max = 300),
+        'case_price' => $faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 50),
+    ]
+});

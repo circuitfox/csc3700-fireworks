@@ -5,19 +5,19 @@
   </div>
   <div class="col-sm-4">
     <!-- product info -->
-    <h4>Description:</h4><br>
+    <h5><b><u>Description:</u></b></h5>
     <p>{{ $product->description }}</p>
-    <h4>Brand:</h4><br>
+    <h5><b><u>Brand:</u></b></h5>
     <p>{{ $product->brand }}</p>
-    <h4>Catalog Page:</h4><br>
+    <h5><b><u>Catalog Page:</u></b></h5>
     <p>{{ $product->catalog_page }}</p>
-    <h4>Packing:</h4><br>
+    <h5><b><u>Packing:</u></b></h5>
     <p>{{ $product->packing }}</p>
-    <h4>Remarks:</h4><br>
+    <h5><b><u>Remarks:</u></b></h5>
     <p>{{ $product->remarks }}</p>
-    <h4>Price Per Case:</h4><br>
+    <h5><b><u>Price Per Case:</u></b></h5>
     <p>{{ $product->case_price }}</p>
-    <h4>Price Per Piece:</h4><br>
+    <h5><b><u>Price Per Piece:</u></b></h5>
     <p>{{ $product->piece_price }}</p>
   </div>
 </div>
