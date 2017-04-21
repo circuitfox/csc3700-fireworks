@@ -21,8 +21,8 @@ class OrderControllerTests extends TestCase
         foreach ($orders as $order) {
             $resp->assertSee("#order" . $order->id);
             $resp->assertSee("Order " . $order->id);
-            $resp->assertSee("for " . htmlspecialchars($order->user->name));
-            $resp->assertSee("for " . htmlspecialchars($user->name));
+            $resp->assertSee("for " . htmlspecialchars($order->user->name, ENT_QUOTES));
+            $resp->assertSee("for " . htmlspecialchars($user->name, ENT_QUOTES));
 
             // FIXME: Product order stuff
         }
@@ -37,7 +37,7 @@ class OrderControllerTests extends TestCase
 
         $this->get("/orders/" . $order->id)
             ->assertSee("Order " . $order->id)
-            ->assertSee("for " . htmlspecialchars($order->user->name))
-            ->assertSee("for " . htmlspecialchars($user->name));
+            ->assertSee("for " . htmlspecialchars($order->user->name, ENT_QUOTES))
+            ->assertSee("for " . htmlspecialchars($user->name, ENT_QUOTES));
     }
 }
