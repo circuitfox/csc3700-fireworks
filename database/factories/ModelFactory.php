@@ -47,5 +47,5 @@ $factory->define(App\Product::class, function (Faker\Generator $faker) {
         'remarks' => $faker->sentence,
         'piece_price' => $faker->randomFloat(2, 0, 999999.99),
         'case_price' => $faker->randomFloat(2, 0, 999999.99),
-    ]
+    ];
 });
