@@ -1,5 +1,5 @@
 <div class="container">
-  <form class="form-horizontal" method="POST" action="/products" ecntype="multipart/form-data">
+  <form class="form-horizontal" method="POST" action="/products" enctype="multipart/form-data">
     {{ csrf_field() }}
     <div class="form-group">
       <label for="id" class="col-md-2 control-label">Product ID#:</label>
