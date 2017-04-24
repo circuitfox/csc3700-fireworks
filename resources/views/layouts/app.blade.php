@@ -25,7 +25,7 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="">Page 1</a></li>
+            <li><a href="/products">Products</a></li>
             <li><a href="">Page 2</a></li>
           </ul>
         </div>

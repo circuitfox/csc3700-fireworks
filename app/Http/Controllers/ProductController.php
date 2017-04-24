@@ -35,7 +35,31 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pID = request('id');
+        //$imgPath = $request->file('img_link')->store('images/');
+        $imgPath = "https://www.colourbox.com/preview/3866320-blue-festive-fireworks-at-night.jpg";
+        $pPage = request('catalog_page');
+        $pBrand = request('brand');
+        $pDesc = request('description');
+        $pPack = request('packing');
+        $pRemarks = request('remarks');
+        $pPiece = request('piece_price');
+        $pCase = request('case_price');
+
+        $newProduct = new Product;
+        $newProduct->id = $pID;
+        $newProduct->img_link = $imgPath;
+        $newProduct->catalog_page = $pPage;
+        $newProduct->brand = $pBrand;
+        $newProduct->description = $pDesc;
+        $newProduct->packing = $pPack;
+        $newProduct->remarks = $pRemarks;
+        $newProduct->piece_price = $pPiece;
+        $newProduct->case_price = $pCase;
+
+        $newProduct->save();
+        //dd(request()->all());
+        return redirect('/products');
     }
 
     /**

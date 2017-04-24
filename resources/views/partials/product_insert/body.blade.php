@@ -1,5 +1,5 @@
 <div class="container">
-  <form class="form-horizontal" method="POST" action="/products">
+  <form class="form-horizontal" method="POST" action="/products" ecntype="multipart/form-data">
     {{ csrf_field() }}
     <div class="form-group">
       <label for="id" class="col-md-2 control-label">Product ID#:</label>
@@ -10,7 +10,7 @@
     <div class="form-group">
       <label for="img_link" class="col-md-2 control-label">Upload Preview Image:</label>
       <div class="col-md-6">
-        <input type="CARL LEARN THE FILE UPLOAD STUFF" class="form-control" id="img_link" name="img_link">
+        <input type="file" id="img_link" name="img_link">
       </div>
     </div>
     <div class="form-group">
