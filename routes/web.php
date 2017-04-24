@@ -20,3 +20,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 Route::resource("orders", "OrderController");
+
+Route::resource("products", "ProductController");
