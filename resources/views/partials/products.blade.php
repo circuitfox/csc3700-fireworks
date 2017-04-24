@@ -2,9 +2,28 @@
   @foreach ($products as $product)
     <div class="panel panel-default">
       <div class="panel-heading" role="tab">
-        <a class="accordion collapsed" role="button" data-parent="/products" href="/products/{{ $product->id }}">
-          @include("partials/product/header", ["product" => $product])
-        </a>
+        @if ($dashboard)
+          <div class="row">
+            <a class="accordion collapsed col-md-8" role="button" data-toggle="collapse"
+               data-parent="#products" href="#product{{ $product->id }}">
+              @include("partials/product/header", ["product" => $product])
+            </a>
+            <div class="btn-toolbar col-md-4">
+              <form name="edit-product{{ $product->id }}" action="/products/{{ $product->id }}/edit"
+                    method="get">
+                  {{ csrf_field() }}
+                  <button type="submit" class="btn btn-primary h3">Edit</button>
+              </form>
+              <button type="button" class="btn btn-primary h3" data-toggle="modal"
+                      data-target="#product-delete-modal" data-id="{{ $product->id }}">Delete</button>
+            </div>
+          </div>
+        @else
+          <a class="accordion collapsed" role="button" data-toggle="collapse"
+             data-parent="#products" href="#product{{ $product->id }}">
+            @include("partials/product/header", ["product" => $product])
+          </a>
+        @endif
       </div>
       <div id="product{{ $product->id }}" class="panel-collapse collapse" role="tabpanel">
         <div class="panel-body">
@@ -13,6 +32,7 @@
       </div>
     </div>
   @endforeach
+  @include("partials/product/delete-modal")
   <br>
   <a class="btn btn-primary" role="button" href="/products/create">Insert</a>
 </div>
