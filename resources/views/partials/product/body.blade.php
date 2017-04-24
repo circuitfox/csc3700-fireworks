@@ -16,8 +16,8 @@
     <h5><b><u>Remarks:</u></b></h5>
     <p>{{ $product->remarks }}</p>
     <h5><b><u>Price Per Case:</u></b></h5>
-    <p>{{ $product->case_price }}</p>
+    <p>${{ $product->case_price }}</p>
     <h5><b><u>Price Per Piece:</u></b></h5>
-    <p>{{ $product->piece_price }}</p>
+    <p>${{ $product->piece_price }}</p>
   </div>
 </div>
