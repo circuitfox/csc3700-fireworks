@@ -10,6 +10,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class WelcomePageTest extends TestCase
 {
+    use DatabaseMigrations;
     use LayoutTests;
 
     protected function getRoute() {

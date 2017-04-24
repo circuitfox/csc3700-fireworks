@@ -32,7 +32,7 @@
       </div>
     </div>
   @endforeach
-  @if (dashboard)
+  @if ($dashboard)
     @include("partials/product/delete-modal")
   @endif
 </div>
