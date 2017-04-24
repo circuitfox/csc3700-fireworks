@@ -10,7 +10,7 @@
       @include("partials/products", ["products" => App\Product::all(), "dashboard" => true])
     </div>
     <div class="tab-pane fade" id="tab2">
-      <p>Here is some other stuff for Tab 2</p>
+      @include("partials/orders", ["orders" => App\Order::all()])
     </div>
 </div>
 @endsection
