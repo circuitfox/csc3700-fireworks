@@ -32,5 +32,7 @@
       </div>
     </div>
   @endforeach
-  @include("partials/product/delete-modal")
+  @if (dashboard)
+    @include("partials/product/delete-modal")
+  @endif
 </div>
