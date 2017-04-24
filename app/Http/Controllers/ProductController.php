@@ -35,9 +35,21 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate(request(), [
+          'id' => 'required',
+          //'catalog_page' =>
+          'brand' => 'required',
+          'description' => 'required',
+          'packing' => 'required',
+          //'remarks' =>
+          'piece_price' => 'required',
+          'case_price' => 'required',
+        ]);
+
         $pID = request('id');
-        //$imgPath = $request->file('img_link')->store('images/');
-        $imgPath = "https://www.colourbox.com/preview/3866320-blue-festive-fireworks-at-night.jpg";
+        $imgPath = $request->file('img_link')->store('images');
+        //$imgPath = "https://www.colourbox.com/preview/3866320-blue-festive-fireworks-at-night.jpg";
+        //$imgPath = "https://images.blogthings.com/whatcolorfireworksareyouquiz/green-fireworks.jpg";
         $pPage = request('catalog_page');
         $pBrand = request('brand');
         $pDesc = request('description');
