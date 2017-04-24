@@ -56,7 +56,7 @@ class ProductController extends Controller
           $imgName = request('description') . '.' . $image->getClientOriginalExtension();
           Image::make($image)->resize(200, 200)->save( public_path('/images/') . $imgName);
         } else {
-          $imgName = '/images/Fireworks-generic.jpg';
+          $imgName = 'Fireworks-generic.jpg';
         }
 
         $pPage = request('catalog_page');
