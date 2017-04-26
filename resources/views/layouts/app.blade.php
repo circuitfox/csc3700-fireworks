@@ -24,13 +24,6 @@
           <a href="/" class="navbar-brand">Fireworks Shop</a>
         </div>
         <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            @if(Auth::guest())
-            @elseif(Auth::user()->is_admin == 1)
-              <li><a href="/products">Products</a></li>
-              <li><a href="/orders">Orders</a></li>
-            @endif
-          </ul>
           <ul class="nav navbar-nav navbar-right">
             @if(Auth::guest())
               <li><a href="/login">Login</a></li>
