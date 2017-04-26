@@ -43,8 +43,8 @@
                 </a>
                 <ul class="dropdown-menu" role="menu">
                   <li>
-                    <a href="/home" class="glyphicon glyphicon-home">Dashboard</a>
-                    <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="glyphicon glyphicon-log-out">Logout</a>
+                    <a href="/home" class="glyphicon glyphicon-home">&nbsp;Dashboard</a>
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="glyphicon glyphicon-log-out">&nbsp;Logout</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                       {{ csrf_field() }}
                     </form>
