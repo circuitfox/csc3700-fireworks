@@ -44,7 +44,6 @@ class WelcomePageTest extends TestCase
         $products = factory(\App\Product::class, 10)->create();
         $page = $this->get($this->getRoute());
         foreach ($products as $product) {
-            print($product->id . "\n");
             $page->assertSee("product" . $product->id)
                 ->assertSee($product->description)
                 ->assertSee("edit-product" . $product->id)
