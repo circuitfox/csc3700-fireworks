@@ -25,8 +25,33 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="">Page 1</a></li>
-            <li><a href="">Page 2</a></li>
+            @if(Auth::guest())
+            @elseif(Auth::user()->is_admin == 1)
+              <li><a href="/products">Products</a></li>
+              <li><a href="/orders">Orders</a></li>
+            @endif
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            @if(Auth::guest())
+              <li><a href="/login">Login</a></li>
+              <li><a href="/register">Register</a></li>
+            @else
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                  {{ Auth::user()->name }}
+                  <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <li>
+                    <a href="/home" class="glyphicon glyphicon-home">&nbsp;Dashboard</a>
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="glyphicon glyphicon-log-out">&nbsp;Logout</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                      {{ csrf_field() }}
+                    </form>
+                  </li>
+                </ul>
+              </li>
+              @endif
           </ul>
         </div>
       </div>
