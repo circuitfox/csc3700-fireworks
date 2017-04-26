@@ -45,7 +45,7 @@ class WelcomePageTest extends TestCase
         $page = $this->get($this->getRoute());
         foreach ($products as $product) {
             $page->assertSee("product" . $product->id)
-                ->assertSee($product->description)
+                ->assertSee(htmlspecialchars($product->description, ENT_QUOTES))
                 ->assertSee("edit-product" . $product->id)
                 ->assertSee("/products/" . $product->id . "/edit")
                 ->assertSee($product->brand);
