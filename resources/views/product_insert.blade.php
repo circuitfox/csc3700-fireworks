@@ -1,13 +1,12 @@
 @extends("layouts/app")
 @section("content")
-</div>
-<div class="container col-md-8 col-md-offset-2">
+<div class="container col-md-6 col-md-offset-3">
   <div class="panel">
     <div class="panel-heading panel-default">
-      @include("partials/product/header", ["product" => $product])
+      @include("partials/product_insert/header")
     </div>
     <div class="panel-body">
-      @include("partials/product/body", ["product" => $product])
+      @include("partials/product_insert/body")
     </div>
   </div>
 </div>
