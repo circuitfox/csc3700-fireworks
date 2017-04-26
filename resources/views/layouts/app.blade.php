@@ -25,8 +25,11 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="">Page 1</a></li>
-            <li><a href="">Page 2</a></li>
+            @if(Auth::guest())
+            @elseif(Auth::user()->is_admin == 1)
+              <li><a href="/products">Products</a></li>
+              <li><a href="/orders">Orders</a></li>
+            @endif
           </ul>
           <ul class="nav navbar-nav navbar-right">
             @if(Auth::guest())
@@ -40,7 +43,8 @@
                 </a>
                 <ul class="dropdown-menu" role="menu">
                   <li>
-                    <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
+                    <a href="/home" class="glyphicon glyphicon-home">Dashboard</a>
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="glyphicon glyphicon-log-out">Logout</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                       {{ csrf_field() }}
                     </form>
