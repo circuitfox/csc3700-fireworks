@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use Image;
 
 class ProductController extends Controller
 {
@@ -54,10 +55,18 @@ class ProductController extends Controller
           'case_price' => 'required',
         ]);
 
+        //dd(request()->all());
+
         $pID = request('id');
-        $imgPath = $request->file('img_link')->store('images');
-        //$imgPath = "https://www.colourbox.com/preview/3866320-blue-festive-fireworks-at-night.jpg";
-        //$imgPath = "https://images.blogthings.com/whatcolorfireworksareyouquiz/green-fireworks.jpg";
+
+        if($request->hasFile('img_link')){
+          $image = $request->file('img_link');
+          $imgName = request('description') . '.' . $image->getClientOriginalExtension();
+          Image::make($image)->resize(200, 200)->save( public_path('/images/') . $imgName);
+        } else {
+          $imgName = 'Fireworks-generic.jpg';
+        }
+
         $pPage = request('catalog_page');
         $pBrand = request('brand');
         $pDesc = request('description');
@@ -68,7 +77,7 @@ class ProductController extends Controller
 
         $newProduct = new Product;
         $newProduct->id = $pID;
-        $newProduct->img_link = $imgPath;
+        $newProduct->img_link = '/images/' . $imgName;
         $newProduct->catalog_page = $pPage;
         $newProduct->brand = $pBrand;
         $newProduct->description = $pDesc;
