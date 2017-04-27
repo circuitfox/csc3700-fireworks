@@ -48,7 +48,7 @@ class WelcomePageTest extends TestCase
                 ->assertSee(htmlspecialchars($product->description, ENT_QUOTES))
                 ->assertSee("edit-product" . $product->id)
                 ->assertSee("/products/" . $product->id . "/edit")
-                ->assertSee($product->brand);
+                ->assertSee(htmlspecialchars($product->brand, ENT_QUOTES));
         }
         $page->assertSee("product-delete-modal");
     }
@@ -60,12 +60,29 @@ class WelcomePageTest extends TestCase
             $o->user()->associate($user);
             $o->save();
         });
+        foreach ($orders as $order) {
+            $productOrder = factory(\App\ProductOrder::class)
+                ->states("with_product")
+                ->create();
+            $productOrder->order()->associate($order);
+            $productOrder->save();
+        }
         $page = $this->get($this->getRoute());
         foreach ($orders as $order) {
             $page->assertSee("#order" . $order->id)
                 ->assertSee("Order " . $order->id)
                 ->assertSee("for " . htmlspecialchars($order->user->name, ENT_QUOTES))
-                ->assertSee("for " . htmlspecialchars($user->name, ENT_QUOTES));
+                ->assertSee("for " . htmlspecialchars($user->name, ENT_QUOTES))
+                ->assertSee("<table class=\"table\">")
+                ->assertSee("Quantity")
+                ->assertSee("Product")
+                ->assertSee("Price")
+                ->assertSee("<td>" . $order->productOrders[0]->quantity . "</td>")
+                ->assertSee($order->productOrders[0]->product->description)
+                ->assertSee("/products/" . $order->productOrders[0]->product->id)
+                ->assertSee("$" . ($order->productOrders[0]->product->piece_price * 
+                                   $order->productOrders[0]->quantity))
+                ->assertSee("Total Price:");
         }
     }
 }
