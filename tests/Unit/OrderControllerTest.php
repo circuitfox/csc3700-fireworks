@@ -40,8 +40,8 @@ class OrderControllerTests extends TestCase
                 ->assertSee("<td>" . $order->productOrders[0]->quantity . "</td>")
                 ->assertSee($order->productOrders[0]->product->description)
                 ->assertSee("/products/" . $order->productOrders[0]->product->id)
-                ->assertSee("$" . ($order->productOrders[0]->product->piece_price * 
-                                   $order->productOrders[0]->quantity))
+                ->assertSee("$" . number_format($order->productOrders[0]->product->piece_price * 
+                                                $order->productOrders[0]->quantity, 2))
                 ->assertSee("Total Price:");
         }
     }
@@ -68,7 +68,8 @@ class OrderControllerTests extends TestCase
             ->assertSee("<td>" . $productOrder->quantity . "</td>")
             ->assertSee($productOrder->product->description)
             ->assertSee("/products/" . $productOrder->product->id)
-            ->assertSee("$" . $productOrder->product->piece_price)
+            ->assertSee("$" . number_format($productOrder->product->piece_price *
+                                            $productOrder->quantity, 2))
             ->assertSee("Total Price:");
     }
 }

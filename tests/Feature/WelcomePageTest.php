@@ -82,8 +82,8 @@ class WelcomePageTest extends TestCase
                 ->assertSee("<td>" . $order->productOrders[0]->quantity . "</td>")
                 ->assertSee($order->productOrders[0]->product->description)
                 ->assertSee("/products/" . $order->productOrders[0]->product->id)
-                ->assertSee("$" . ($order->productOrders[0]->product->piece_price * 
-                                   $order->productOrders[0]->quantity))
+                ->assertSee("$" . number_format($order->productOrders[0]->product->piece_price * 
+                                                $order->productOrders[0]->quantity, 2))
                 ->assertSee("Total Price:");
         }
     }

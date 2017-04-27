@@ -15,7 +15,7 @@
           </a></b>
         </td>
         <td>
-          ${{ $productOrder->quantity * $productOrder->product->piece_price }}
+          ${{ number_format($productOrder->quantity * $productOrder->product->piece_price, 2) }}
         </td>
       </tr>
     @endforeach
@@ -24,9 +24,9 @@
           <td><b>Total Price:</b></td>
           <td></td>
           <td>
-            ${{ $order->productOrders->reduce(function ($acc, $po) {
-                    return $acc + $po->product->piece_price;
-                })
+            ${{ number_format($order->productOrders->reduce(function ($acc, $po) {
+                    return $acc + ($po->product->piece_price * $po->quantity);
+                }), 2)
              }}
           </td>
         </tr>
