@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Tests\LayoutTests;
 use Tests\TestCase;
+use Tests\TestHelpers;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -12,6 +13,7 @@ class WelcomePageTest extends TestCase
 {
     use DatabaseMigrations;
     use LayoutTests;
+    use TestHelpers;
 
     protected function getRoute() {
        return "/";
@@ -45,10 +47,10 @@ class WelcomePageTest extends TestCase
         $page = $this->get($this->getRoute());
         foreach ($products as $product) {
             $page->assertSee("product" . $product->id)
-                ->assertSee(htmlspecialchars($product->description, ENT_QUOTES))
+                ->assertSee($this->h($product->description))
                 ->assertSee("edit-product" . $product->id)
                 ->assertSee("/products/" . $product->id . "/edit")
-                ->assertSee(htmlspecialchars($product->brand, ENT_QUOTES));
+                ->assertSee($this->h($product->brand));
         }
         $page->assertSee("product-delete-modal");
     }
@@ -71,8 +73,8 @@ class WelcomePageTest extends TestCase
         foreach ($orders as $order) {
             $page->assertSee("#order" . $order->id)
                 ->assertSee("Order " . $order->id)
-                ->assertSee("for " . htmlspecialchars($order->user->name, ENT_QUOTES))
-                ->assertSee("for " . htmlspecialchars($user->name, ENT_QUOTES))
+                ->assertSee("for " . $this->h($order->user->name))
+                ->assertSee("for " . $this->h($user->name))
                 ->assertSee("<table class=\"table\">")
                 ->assertSee("Quantity")
                 ->assertSee("Product")

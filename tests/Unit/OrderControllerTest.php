@@ -3,12 +3,14 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
+use Tests\TestHelpers;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class OrderControllerTests extends TestCase
 {
     use DatabaseMigrations;
+    use TestHelpers;
 
     public function testIndex()
     {
@@ -29,8 +31,8 @@ class OrderControllerTests extends TestCase
         foreach ($orders as $order) {
             $resp->assertSee("#order" . $order->id)
                 ->assertSee("Order " . $order->id)
-                ->assertSee("for " . htmlspecialchars($order->user->name, ENT_QUOTES))
-                ->assertSee("for " . htmlspecialchars($user->name, ENT_QUOTES))
+                ->assertSee("for " . $this->h($order->user->name))
+                ->assertSee("for " . $this->h($user->name))
                 ->assertSee("<table class=\"table\">")
                 ->assertSee("Quantity")
                 ->assertSee("Product")
@@ -57,8 +59,8 @@ class OrderControllerTests extends TestCase
 
         $this->get("/orders/" . $order->id)
             ->assertSee("Order " . $order->id)
-            ->assertSee("for " . htmlspecialchars($order->user->name, ENT_QUOTES))
-            ->assertSee("for " . htmlspecialchars($user->name, ENT_QUOTES))
+            ->assertSee("for " . $this->h($order->user->name))
+            ->assertSee("for " . $this->h($user->name))
             ->assertSee("<table class=\"table\">")
             ->assertSee("Quantity")
             ->assertSee("Product")
