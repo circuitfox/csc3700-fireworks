@@ -8,13 +8,13 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class WelcomePageTest extends TestCase
+class HomePageTest extends TestCase
 {
     use DatabaseMigrations;
     use LayoutTests;
 
     protected function getRoute() {
-       return "/";
+       return "/home";
     }
 
     /**
@@ -41,7 +41,7 @@ class WelcomePageTest extends TestCase
 
     public function testHasProducts()
     {
-        $products = factory(\App\Product::class, 10)->create();
+        $products = factory(\App\Product::class, 10)->state('admin')->create();
         $page = $this->get($this->getRoute());
         foreach ($products as $product) {
             $page->assertSee("product" . $product->id)
@@ -55,7 +55,7 @@ class WelcomePageTest extends TestCase
 
     public function testHasOrders()
     {
-        $user = factory(\App\User::class)->create();
+        $user = factory(\App\User::class)->state('admin')->create();
         $orders = factory(\App\Order::class, 10)->create()->each(function($o) use ($user) {
             $o->user()->associate($user);
             $o->save();
