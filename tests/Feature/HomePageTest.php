@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use Tests\LayoutTests;
+//use Tests\LayoutTests;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -11,7 +11,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class HomePageTest extends TestCase
 {
     use DatabaseMigrations;
-    use LayoutTests;
+    //use LayoutTests;
 
     protected function getRoute() {
        return "/home";
