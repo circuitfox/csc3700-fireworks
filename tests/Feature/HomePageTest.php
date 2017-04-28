@@ -41,7 +41,7 @@ class HomePageTest extends TestCase
 
     public function testHasProducts()
     {
-        $products = factory(\App\Product::class, 10)->state('admin')->create();
+        $products = factory(\App\Product::class, 10)->states('admin')->create();
         $page = $this->get($this->getRoute());
         foreach ($products as $product) {
             $page->assertSee("product" . $product->id)
@@ -55,7 +55,7 @@ class HomePageTest extends TestCase
 
     public function testHasOrders()
     {
-        $user = factory(\App\User::class)->state('admin')->create();
+        $user = factory(\App\User::class)->states('admin')->create();
         $orders = factory(\App\Order::class, 10)->create()->each(function($o) use ($user) {
             $o->user()->associate($user);
             $o->save();
