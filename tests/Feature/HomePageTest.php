@@ -2,21 +2,21 @@
 
 namespace Tests\Feature;
 
-use Tests\LayoutTests;
+//use Tests\LayoutTests;
 use Tests\TestCase;
 use Tests\TestHelpers;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class WelcomePageTest extends TestCase
+class HomePageTest extends TestCase
 {
     use DatabaseMigrations;
-    use LayoutTests;
+    //use LayoutTests;
     use TestHelpers;
 
     protected function getRoute() {
-       return "/";
+       return "/home";
     }
 
     /**
@@ -26,7 +26,8 @@ class WelcomePageTest extends TestCase
      */
     public function testHasTabs()
     {
-        $this->get($this->getRoute())
+        $user = factory(\App\User::class)->states('admin')->create();
+        $this->actingAs($user)->get($this->getRoute())
             ->assertSee("nav-tabs")
             ->assertSee("#tab1")
             ->assertSee("#tab2")
@@ -36,15 +37,17 @@ class WelcomePageTest extends TestCase
 
     public function testHasInsertButton()
     {
-        $this->get($this->getRoute())
+        $user = factory(\App\User::class)->states('admin')->create();
+        $this->actingAs($user)->get($this->getRoute())
             ->assertSee("/products/create")
             ->assertSee("Add Product");
     }
 
     public function testHasProducts()
     {
+        $user = factory(\App\User::class)->states('admin')->create();
         $products = factory(\App\Product::class, 10)->create();
-        $page = $this->get($this->getRoute());
+        $page = $this->actingAs($user)->get($this->getRoute());
         foreach ($products as $product) {
             $page->assertSee("product" . $product->id)
                 ->assertSee($this->h($product->description))
@@ -57,7 +60,7 @@ class WelcomePageTest extends TestCase
 
     public function testHasOrders()
     {
-        $user = factory(\App\User::class)->create();
+        $user = factory(\App\User::class)->states('admin')->create();
         $orders = factory(\App\Order::class, 10)->create()->each(function($o) use ($user) {
             $o->user()->associate($user);
             $o->save();
@@ -69,7 +72,7 @@ class WelcomePageTest extends TestCase
             $productOrder->order()->associate($order);
             $productOrder->save();
         }
-        $page = $this->get($this->getRoute());
+        $page = $this->actingAs($user)->get($this->getRoute());
         foreach ($orders as $order) {
             $page->assertSee("#order" . $order->id)
                 ->assertSee("Order " . $order->id)

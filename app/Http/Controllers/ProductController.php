@@ -88,7 +88,7 @@ class ProductController extends Controller
 
         $newProduct->save();
         //dd(request()->all());
-        return redirect('/products');
+        return redirect('/home');
     }
 
     /**
