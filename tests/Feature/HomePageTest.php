@@ -24,7 +24,8 @@ class HomePageTest extends TestCase
      */
     public function testHasTabs()
     {
-        $this->get($this->getRoute())
+        $user = factory(\App\User::class)->states('admin')->create();
+        $this->actingAs($user)->get($this->getRoute())
             ->assertSee("nav-tabs")
             ->assertSee("#tab1")
             ->assertSee("#tab2")
@@ -34,15 +35,17 @@ class HomePageTest extends TestCase
 
     public function testHasInsertButton()
     {
-        $this->get($this->getRoute())
+        $user = factory(\App\User::class)->states('admin')->create();
+        $this->actingAs($user)->get($this->getRoute())
             ->assertSee("/products/create")
             ->assertSee("Add Product");
     }
 
     public function testHasProducts()
     {
-        $products = factory(\App\Product::class, 10)->states('admin')->create();
-        $page = $this->get($this->getRoute());
+        $user = factory(\App\User::class)->states('admin')->create();
+        $products = factory(\App\Product::class, 10)->create();
+        $page = $this->actingAs($user)->get($this->getRoute());
         foreach ($products as $product) {
             $page->assertSee("product" . $product->id)
                 ->assertSee(htmlspecialchars($product->description, ENT_QUOTES))
@@ -60,7 +63,7 @@ class HomePageTest extends TestCase
             $o->user()->associate($user);
             $o->save();
         });
-        $page = $this->get($this->getRoute());
+        $page = $this->actingAs($user)->get($this->getRoute());
         foreach ($orders as $order) {
             $page->assertSee("#order" . $order->id)
                 ->assertSee("Order " . $order->id)
