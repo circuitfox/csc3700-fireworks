@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 //use Tests\LayoutTests;
 use Tests\TestCase;
+use Tests\TestHelpers;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -12,6 +13,7 @@ class HomePageTest extends TestCase
 {
     use DatabaseMigrations;
     //use LayoutTests;
+    use TestHelpers;
 
     protected function getRoute() {
        return "/home";
@@ -48,10 +50,10 @@ class HomePageTest extends TestCase
         $page = $this->actingAs($user)->get($this->getRoute());
         foreach ($products as $product) {
             $page->assertSee("product" . $product->id)
-                ->assertSee(htmlspecialchars($product->description, ENT_QUOTES))
+                ->assertSee($this->h($product->description))
                 ->assertSee("edit-product" . $product->id)
                 ->assertSee("/products/" . $product->id . "/edit")
-                ->assertSee($product->brand);
+                ->assertSee($this->h($product->brand));
         }
         $page->assertSee("product-delete-modal");
     }
@@ -63,12 +65,29 @@ class HomePageTest extends TestCase
             $o->user()->associate($user);
             $o->save();
         });
+        foreach ($orders as $order) {
+            $productOrder = factory(\App\ProductOrder::class)
+                ->states("with_product")
+                ->create();
+            $productOrder->order()->associate($order);
+            $productOrder->save();
+        }
         $page = $this->actingAs($user)->get($this->getRoute());
         foreach ($orders as $order) {
             $page->assertSee("#order" . $order->id)
                 ->assertSee("Order " . $order->id)
-                ->assertSee("for " . htmlspecialchars($order->user->name, ENT_QUOTES))
-                ->assertSee("for " . htmlspecialchars($user->name, ENT_QUOTES));
+                ->assertSee("for " . $this->h($order->user->name))
+                ->assertSee("for " . $this->h($user->name))
+                ->assertSee("<table class=\"table\">")
+                ->assertSee("Quantity")
+                ->assertSee("Product")
+                ->assertSee("Price")
+                ->assertSee("<td>" . $order->productOrders[0]->quantity . "</td>")
+                ->assertSee($order->productOrders[0]->product->description)
+                ->assertSee("/products/" . $order->productOrders[0]->product->id)
+                ->assertSee("$" . number_format($order->productOrders[0]->product->piece_price * 
+                                                $order->productOrders[0]->quantity, 2))
+                ->assertSee("Total Price:");
         }
     }
 }
