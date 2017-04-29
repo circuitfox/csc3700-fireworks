@@ -11,7 +11,7 @@ class DashboardTestSeeder extends Seeder
      */
     public function run()
     {
-      $user = factory(\App\User::class)->states('admin')->create();
+      $user = factory(\App\User::class)->create();
       $orders = factory(\App\Order::class, 5)->create()->each(function ($o) use ($user) {
             $o->user()->associate($user);
             $o->save();
