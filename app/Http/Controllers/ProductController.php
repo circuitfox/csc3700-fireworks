@@ -15,8 +15,9 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $products = Product::all()->paginate(10);
         if(\Auth::user()->is_admin == 1){
-          return view("products", ["products" => Product::all()]);
+          return view("products", ["products" => $products]);
         }else{
           return redirect("/");
         }
