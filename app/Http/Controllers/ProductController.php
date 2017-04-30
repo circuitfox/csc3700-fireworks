@@ -15,7 +15,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-      //
+        if(\Auth::guest()){
+            return redirect("/");
+        }elseif(\Auth::user()->is_admin == 1){
+          return view("products");
+        }else{
+          return redirect("/");
+        }
     }
 
     /**
@@ -25,7 +31,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        if(\Auth::user()->is_admin == 1){
+        if(\Auth::guest()){
+            return redirect("/");
+        }elseif(\Auth::user()->is_admin == 1){
           return view("product_insert");
         }else{
           return redirect("/");
