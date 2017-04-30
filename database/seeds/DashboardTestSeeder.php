@@ -18,12 +18,12 @@ class DashboardTestSeeder extends Seeder
         });
         foreach ($orders as $order) {
             factory(\App\ProductOrder::class, 5)
-                ->states("with_product")
-                ->create()
-                ->each(function ($po) use ($order) {
-                    $po->order()->associate($order);
-                    $po->save();
-                });
+            ->states("with_product")
+            ->create()
+            ->each(function ($po) use ($order) {
+                $po->order()->associate($order);
+                $po->save();
+            });
         }
     }
 }
