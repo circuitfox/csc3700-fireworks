@@ -9,7 +9,7 @@
     <div class="tab-content col-md-offset-1 col-md-9" id="TabContents">
       <div class="tab-pane fade active in" id="tab1">
         <a class="btn btn-primary margin-10" type="button" href="/products/create">Add Product</a>
-        @include("partials/products", ["products" => App\Product::all(), "dashboard" => true])
+        @include("partials/products", ["products" => App\Product::paginate(10), "dashboard" => true])
       </div>
       <div class="tab-pane fade" id="tab2">
         @include("partials/orders", ["orders" => App\Order::all()])

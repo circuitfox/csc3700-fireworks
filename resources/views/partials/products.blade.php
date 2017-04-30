@@ -32,6 +32,11 @@
       </div>
     </div>
   @endforeach
+  <div class="container">
+    <div class="col-md-9 text-center">
+      {{ $products->links() }}
+    </div>
+  </div>
   @if ($dashboard)
     @include("partials/product/delete-modal")
   @endif
