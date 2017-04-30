@@ -22,3 +22,9 @@ Route::get('/home', 'HomeController@index');
 Route::resource("orders", "OrderController");
 
 Route::resource("products", "ProductController");
+
+Route::get("/password/admin", "Auth\ForceResetPasswordController@showForceResetForm")
+    ->name("password.admin.reset");
+
+Route::post("/password/admin", "Auth\ForceResetPasswordController@reset")
+    ->name("password.admin.reset");
