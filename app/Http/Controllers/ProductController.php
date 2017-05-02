@@ -114,7 +114,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view("product_update", ["product" => $product]);
     }
 
     /**
@@ -126,7 +126,43 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $this->validate(request(), [
+          //'catalog_page' =>
+          'brand' => 'required',
+          'description' => 'required',
+          'packing' => 'required',
+          //'remarks' =>
+          'piece_price' => 'required',
+          'case_price' => 'required',
+        ]);
+
+        if ($request->hasFile('img_link')) {
+          $image = $request->file('img_link');
+          $imgName = request('description') . '.' . $image->getClientOriginalExtension();
+          Image::make($image)->resize(200, 200)->save( public_path('/images/') . $imgName);
+        } else {
+          $imgName = $product->img_link;
+        }
+
+        $pPage = request('catalog_page');
+        $pBrand = request('brand');
+        $pDesc = request('description');
+        $pPack = request('packing');
+        $pRemarks = request('remarks');
+        $pPiece = request('piece_price');
+        $pCase = request('case_price');
+
+        $product->img_link = '/images/' . $imgName;
+        $product->catalog_page = $pPage;
+        $product->brand = $pBrand;
+        $product->description = $pDesc;
+        $product->packing = $pPack;
+        $product->remarks = $pRemarks;
+        $product->piece_price = $pPiece;
+        $product->case_price = $pCase;
+
+        $product->save();
+        return redirect('/home');
     }
 
     /**
