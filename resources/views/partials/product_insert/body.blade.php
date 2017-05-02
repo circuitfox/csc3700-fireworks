@@ -57,7 +57,10 @@
         <input type="text" class="form-control" id="case_price" name="case_price" required>
       </div>
     </div>
-    <div class="col-sm-2 col-sm-offset-8">
+    <div class="col-sm-2 col-sm-offset-6">
+      <a class="btn btn-default" href="/home" type="button">Go Back</a>
+    </div>
+    <div class="col-sm-2">
       <button type="submit" class="btn btn-primary">Submit</button>
     </div>
   </form>
