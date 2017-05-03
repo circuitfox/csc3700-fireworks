@@ -28,3 +28,5 @@ Route::get("/password/admin", "Auth\ForceResetPasswordController@showForceResetF
 
 Route::post("/password/admin", "Auth\ForceResetPasswordController@reset")
     ->name("password.admin.reset");
+
+Route::resource("users", "UserController");

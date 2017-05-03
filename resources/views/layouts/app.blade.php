@@ -24,6 +24,17 @@
           <a href="/" class="navbar-brand">Fireworks Shop</a>
         </div>
         <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-left">
+            @if (!Auth::guest())
+              <li><a href="/home">
+                @if (Auth::user()->is_admin)
+                  Dashboard
+                @else
+                  Order
+                @endif
+              </a></li>
+            @endif
+          </ul>
           <ul class="nav navbar-nav navbar-right">
             @if(Auth::guest())
               <li><a href="/login">Login</a></li>
@@ -37,6 +48,7 @@
                 <ul class="dropdown-menu" role="menu">
                   <li>
                     <a href="/home" class="glyphicon glyphicon-home">&nbsp;Dashboard</a>
+                    <a href="/users/{{ Auth::user()->id }}" class="glyphicon glyphicon-cog">&nbsp;Settings</a>
                     <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="glyphicon glyphicon-log-out">&nbsp;Logout</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                       {{ csrf_field() }}
