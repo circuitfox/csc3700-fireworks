@@ -21,20 +21,13 @@
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a href="/" class="navbar-brand">Fireworks Shop</a>
+          @if (Auth::guest())
+            <a href="/" class="navbar-brand">Fireworks Shop</a>
+          @else
+            <a href="/home" class="navbar-brand">Fireworks Shop</a>
+          @endif
         </div>
         <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav navbar-left">
-            @if (!Auth::guest())
-              <li><a href="/home">
-                @if (Auth::user()->is_admin)
-                  Dashboard
-                @else
-                  Order
-                @endif
-              </a></li>
-            @endif
-          </ul>
           <ul class="nav navbar-nav navbar-right">
             @if(Auth::guest())
               <li><a href="/login">Login</a></li>
