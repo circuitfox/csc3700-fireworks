@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use Auth;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -24,7 +25,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        return view("order_insert");
     }
 
     /**
@@ -35,7 +36,17 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (!session()->has("products")) {
+            return redirect()->back()->with("no-products", "Cannot create order without products");
+        }
+
+        $order = new Order;
+        $order->user()->associate(Auth::user());
+        $order->save();
+        $order->productOrders()->saveMany(session("products"));
+
+        $request->session()->forget("products");
+        return redirect("/home");
     }
 
     /**
@@ -57,7 +68,7 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        return redirect("/home");
     }
 
     /**
@@ -69,7 +80,7 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        return redirect("/home");
     }
 
     /**
@@ -80,6 +91,6 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        return redirect("/home");
     }
 }

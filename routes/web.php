@@ -30,3 +30,5 @@ Route::post("/password/admin", "Auth\ForceResetPasswordController@reset")
     ->name("password.admin.reset");
 
 Route::resource("users", "UserController");
+
+Route::post("/product_order/create", "ProductOrderController@create");
