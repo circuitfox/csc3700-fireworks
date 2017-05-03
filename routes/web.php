@@ -12,7 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if (Auth::guest()) {
+        return view('welcome');
+    } else {
+        return redirect("/home");
+    }
 });
 
 Auth::routes();
@@ -30,3 +34,5 @@ Route::post("/password/admin", "Auth\ForceResetPasswordController@reset")
     ->name("password.admin.reset");
 
 Route::resource("users", "UserController");
+
+Route::post("/product_order/create", "ProductOrderController@create");

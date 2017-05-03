@@ -10,9 +10,13 @@
       <tr>
         <td>{{ $productOrder->quantity }}</td>
         <td>
-          <b><a href="/products/{{ $productOrder->product->id }}">
-            {{ $productOrder->product->description }}
-          </a></b>
+          @if ($productOrder->product->trashed())
+            <i>{{ $productOrder->product->description }}</i>
+          @else
+            <b><a href="/products/{{ $productOrder->product->id }}">
+              {{ $productOrder->product->description }}
+            </a></b>
+          @endif
         </td>
         <td>
           ${{ number_format($productOrder->quantity * $productOrder->product->piece_price, 2) }}
