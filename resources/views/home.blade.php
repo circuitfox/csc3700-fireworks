@@ -18,13 +18,8 @@
   </div>
 @else
   <div class="container">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        Dashboard
-      </div>
-      <div class="panel-body">
-        This is the customer dashboard!
-      </div>
+    <div class="col-md-offset-1 col-md-9">
+      @include("partials.order_insert");
     </div>
   </div>
 @endif
