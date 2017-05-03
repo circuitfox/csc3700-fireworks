@@ -21,18 +21,18 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('home', 'HomeController@index');
 
 Route::resource("orders", "OrderController");
 
 Route::resource("products", "ProductController");
 
-Route::get("/password/admin", "Auth\ForceResetPasswordController@showForceResetForm")
+Route::get("password/admin", "Auth\ForceResetPasswordController@showForceResetForm")
     ->name("password.admin.reset");
 
-Route::post("/password/admin", "Auth\ForceResetPasswordController@reset")
+Route::post("password/admin", "Auth\ForceResetPasswordController@reset")
     ->name("password.admin.reset");
 
 Route::resource("users", "UserController");
 
-Route::post("/product_order/create", "ProductOrderController@create");
+Route::post("product_order/create", "ProductOrderController@create");

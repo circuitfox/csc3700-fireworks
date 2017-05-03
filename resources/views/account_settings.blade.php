@@ -12,7 +12,7 @@
         <a class="btn btn-primary" href="/users/{{ $user->id }}/edit">Edit</a>
       </div>
       <div class="col-md-1">
-        <form action="/users/{{ $user->id }}" method="post">
+        <form action="{{ url('users/' . $user->id) }}" method="post">
           {{ csrf_field() }}
           {{ method_field("delete") }}
           @if (Auth::user()->is_admin)

@@ -1,5 +1,5 @@
 <div class="container">
-  <form class="form-horizontal" method="POST" action="/products/{{ $product->id }}" enctype="multipart/form-data">
+  <form class="form-horizontal" method="POST" action="{{ url('/products/' . $product->id) }}" enctype="multipart/form-data">
     {{ method_field("PUT") }}
     {{ csrf_field() }}
     <div class="form-group">

@@ -12,6 +12,6 @@ $(document).ready(function() {
       var button = $(event.relatedTarget);
       var product = button.data('id');
       var modal = $(this)
-      modal.find('#delete-product').attr('action', '/products/' + product);
+      modal.find('#delete-product').attr('action', '{{ url(\'products/' + product + '\') }}');
   });
 });

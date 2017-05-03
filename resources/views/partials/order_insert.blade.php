@@ -10,7 +10,7 @@
       <h4>Order Products</h4>
     </div>
     <div class="panel-body">
-      <form class="form-horizontal" action="/product_order/create" method="post">
+      <form class="form-horizontal" action="{{ url('product_order/create') }}" method="post">
         {{ csrf_field() }}
         <div class="form-group">
           <label for="product" class="col-md-2">Product:</label>
@@ -32,7 +32,7 @@
       </form>
       <div class="row">
         <div class="col-md-1">
-          <form action="/orders" method="post">
+          <form action="{{ url('orders') }}" method="post">
             {{ csrf_field() }}
             <button type="submit" class="btn btn-primary">Submit Order</button>
           </form>

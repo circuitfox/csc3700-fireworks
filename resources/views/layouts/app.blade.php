@@ -22,16 +22,16 @@
       <div class="container-fluid">
         <div class="navbar-header">
           @if (Auth::guest())
-            <a href="/" class="navbar-brand">Fireworks Shop</a>
+            <a href="{{ url('/') }}" class="navbar-brand">Fireworks Shop</a>
           @else
-            <a href="/home" class="navbar-brand">Fireworks Shop</a>
+            <a href="{{ url('/home') }}" class="navbar-brand">Fireworks Shop</a>
           @endif
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
-            @if(Auth::guest())
-              <li><a href="/login">Login</a></li>
-              <li><a href="/register">Register</a></li>
+            @if (Auth::guest())
+              <li><a href="{{ route('login') }}">Login</a></li>
+              <li><a href="{{ route('register') }}">Register</a></li>
             @else
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

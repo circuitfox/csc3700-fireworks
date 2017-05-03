@@ -9,7 +9,7 @@
       <h4>Edit Account Settings</h4>
     </div>
     <div class="panel-body">
-      <form class="form-horizontal" action="/users/{{ $user->id}}" method="post">
+      <form class="form-horizontal" action="{{ url('users/' . $user->id) }}" method="post">
         {{ csrf_field() }}
         {{ method_field("put") }}
         <div class="form-group">

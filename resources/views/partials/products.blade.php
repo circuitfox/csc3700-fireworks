@@ -9,7 +9,7 @@
               @include("partials/product/header", ["product" => $product])
             </a>
             <div class="btn-toolbar col-md-4">
-              <form name="edit-product{{ $product->id }}" action="/products/{{ $product->id }}/edit"
+              <form name="edit-product{{ $product->id }}" action="{{ url('products/' . $product->id . '/edit') }}"
                     method="get">
                   {{ csrf_field() }}
                   <button type="submit" class="btn btn-primary h3">Edit</button>
