@@ -1,3 +1,3 @@
 <h3>
-  Insert record to database table 'products'
+  Add new product
 </h3>
